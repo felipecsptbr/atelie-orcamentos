@@ -1,0 +1,26 @@
+# Arquivos de configuração local
+config.php
+
+# Arquivos temporários do PHP
+*.log
+*.tmp
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependências (caso use Composer futuramente)
+vendor/
+composer.lock
+
+# Arquivos de backup
+*.bak
+*.backup
+*~
