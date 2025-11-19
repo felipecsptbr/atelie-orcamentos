@@ -1,9 +1,11 @@
 <?php
 // Configurações do banco de dados
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'atelie_orcamentos');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+// Usa variáveis de ambiente do Railway ou valores padrão para desenvolvimento local
+define('DB_HOST', getenv('MYSQLHOST') ?: getenv('DB_HOST') ?: 'localhost');
+define('DB_NAME', getenv('MYSQLDATABASE') ?: getenv('DB_NAME') ?: 'atelie_orcamentos');
+define('DB_USER', getenv('MYSQLUSER') ?: getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('MYSQLPASSWORD') ?: getenv('DB_PASS') ?: '');
+define('DB_PORT', getenv('MYSQLPORT') ?: getenv('DB_PORT') ?: '3306');
 
 // IMPORTANTE: Renomeie este arquivo para config.php e ajuste as configurações acima
 // para o seu ambiente de produção
@@ -11,22 +13,28 @@ define('DB_PASS', '');
 // Conectar ao banco de dados
 function getConnection() {
     try {
-        $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS);
+        $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+        $pdo = new PDO($dsn, DB_USER, DB_PASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     } catch(PDOException $e) {
-        // Se o banco não existe, criar
-        try {
-            $tempPdo = new PDO("mysql:host=" . DB_HOST . ";charset=utf8mb4", DB_USER, DB_PASS);
-            $tempPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $tempPdo->exec("CREATE DATABASE IF NOT EXISTS " . DB_NAME . " CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-            
-            // Tentar conectar novamente
-            $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch(PDOException $e2) {
-            die("Erro de conexão: " . $e2->getMessage());
+        // Se o banco não existe, criar (apenas em ambiente local)
+        if (DB_HOST === 'localhost') {
+            try {
+                $tempPdo = new PDO("mysql:host=" . DB_HOST . ";charset=utf8mb4", DB_USER, DB_PASS);
+                $tempPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $tempPdo->exec("CREATE DATABASE IF NOT EXISTS " . DB_NAME . " CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+                
+                // Tentar conectar novamente
+                $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+                $pdo = new PDO($dsn, DB_USER, DB_PASS);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                return $pdo;
+            } catch(PDOException $e2) {
+                die("Erro de conexão: " . $e2->getMessage());
+            }
+        } else {
+            die("Erro de conexão: " . $e->getMessage());
         }
     }
 }
