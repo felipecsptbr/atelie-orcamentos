@@ -12,12 +12,38 @@ echo "MYSQLDATABASE: " . (getenv('MYSQLDATABASE') ?: 'NOT SET') . "<br>";
 echo "MYSQLUSER: " . (getenv('MYSQLUSER') ?: 'NOT SET') . "<br>";
 echo "MYSQLPASSWORD: " . (getenv('MYSQLPASSWORD') ? '***SET***' : 'NOT SET') . "<br>";
 
-echo "<h2>All Environment Variables:</h2>";
+echo "<h2>All Environment Variables (getenv):</h2>";
 echo "<pre>";
 $env = getenv();
 ksort($env);
 foreach($env as $key => $value) {
     if (strpos($key, 'MYSQL') !== false || strpos($key, 'RAILWAY') !== false) {
+        if (strpos(strtolower($key), 'password') !== false) {
+            echo "$key = ***HIDDEN***\n";
+        } else {
+            echo "$key = $value\n";
+        }
+    }
+}
+echo "</pre>";
+
+echo "<h2>\$_ENV Variables:</h2>";
+echo "<pre>";
+foreach($_ENV as $key => $value) {
+    if (strpos($key, 'MYSQL') !== false) {
+        if (strpos(strtolower($key), 'password') !== false) {
+            echo "$key = ***HIDDEN***\n";
+        } else {
+            echo "$key = $value\n";
+        }
+    }
+}
+echo "</pre>";
+
+echo "<h2>\$_SERVER Variables:</h2>";
+echo "<pre>";
+foreach($_SERVER as $key => $value) {
+    if (strpos($key, 'MYSQL') !== false) {
         if (strpos(strtolower($key), 'password') !== false) {
             echo "$key = ***HIDDEN***\n";
         } else {
