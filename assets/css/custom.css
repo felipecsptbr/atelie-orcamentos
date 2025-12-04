@@ -1,0 +1,338 @@
+/* 
+ * Estilos Customizados - Sistema de Orçamentos
+ * Otimizações para Mobile e Melhorias Visuais
+ */
+
+/* ========== Melhorias Mobile ========== */
+
+/* Botões maiores em mobile */
+@media (max-width: 768px) {
+    .btn {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        min-height: 44px; /* Tamanho mínimo recomendado para toque */
+    }
+    
+    .btn-sm {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        min-height: 38px;
+    }
+    
+    /* Inputs maiores */
+    .form-control {
+        min-height: 44px;
+        font-size: 16px; /* Previne zoom no iOS */
+    }
+    
+    /* Cards com menos padding */
+    .card-body {
+        padding: 1rem;
+    }
+    
+    /* Tabelas mais legíveis */
+    .table {
+        font-size: 0.9rem;
+    }
+    
+    .table td, .table th {
+        padding: 0.5rem;
+    }
+    
+    /* Modal full screen em mobile */
+    .modal-dialog {
+        margin: 0;
+        max-width: 100%;
+    }
+    
+    .modal-content {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    
+    /* Melhor espaçamento */
+    .content-wrapper {
+        padding: 0.5rem !important;
+    }
+}
+
+/* ========== Animações Suaves ========== */
+
+.card, .btn, .badge {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ========== Melhorias de UX ========== */
+
+/* Loading state para botões */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Feedback visual em inputs */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(192, 108, 132, 0.25);
+}
+
+/* ========== Badges Melhorados ========== */
+
+.badge {
+    padding: 0.5em 0.75em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ========== Cards com Gradiente ========== */
+
+.card-primary .card-header {
+    background: linear-gradient(135deg, #c06c84 0%, #d88ba0 100%);
+}
+
+.card-info .card-header {
+    background: linear-gradient(135deg, #17a2b8 0%, #5bc0de 100%);
+}
+
+.card-success .card-header {
+    background: linear-gradient(135deg, #6c5b7b 0%, #8a7a9a 100%);
+}
+
+.card-warning .card-header {
+    background: linear-gradient(135deg, #f8b195 0%, #fcc5af 100%);
+}
+
+/* ========== Tooltips Personalizados ========== */
+
+[data-toggle="tooltip"] {
+    cursor: help;
+}
+
+/* ========== Scroll Suave ========== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========== Print Styles ========== */
+
+@media print {
+    .main-sidebar,
+    .main-header,
+    .main-footer,
+    .btn,
+    .breadcrumb {
+        display: none !important;
+    }
+    
+    .content-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ========== Acessibilidade ========== */
+
+/* Foco visível para navegação por teclado */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Alto contraste para links */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ========== Loader de Página ========== */
+
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.page-loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ========== Melhorias na Tabela ========== */
+
+.table-hover tbody tr:hover {
+    background-color: rgba(192, 108, 132, 0.05);
+    cursor: pointer;
+}
+
+/* ========== Status com Ícones ========== */
+
+.badge-status-pendente::before {
+    content: "⏱️ ";
+}
+
+.badge-status-aprovado::before {
+    content: "✅ ";
+}
+
+.badge-status-em_execucao::before {
+    content: "🔄 ";
+}
+
+.badge-status-concluido::before {
+    content: "✔️ ";
+}
+
+.badge-status-cancelado::before {
+    content: "❌ ";
+}
+
+/* ========== Floating Action Button (Mobile) ========== */
+
+@media (max-width: 768px) {
+    .fab-mobile {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        font-size: 24px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .fab-mobile:hover {
+        transform: scale(1.1);
+    }
+}
+
+/* ========== Empty State ========== */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #999;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* ========== Mensagens de Sucesso/Erro Animadas ========== */
+
+.alert {
+    animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ========== WhatsApp Button Style ========== */
+
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    border: none;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+    color: white;
+}
+
+/* ========== Skeleton Loading ========== */
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+.skeleton-text {
+    width: 100%;
+    height: 0.7rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

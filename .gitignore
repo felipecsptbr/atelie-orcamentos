@@ -1,0 +1,27 @@
+# Ateliê Orçamentos - Arquivos Ignorados
+
+# Uploads e arquivos temporários
+uploads/logo/*
+!uploads/logo/.gitkeep
+backups/*.sql
+temp/*
+
+# Configurações locais (não commitar senhas)
+# config/config.php
+
+# Logs
+*.log
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-*
+
+# PHP
+vendor/
+composer.lock
