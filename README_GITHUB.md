@@ -43,7 +43,7 @@ Veja [DEPLOY.md](DEPLOY.md) para instruções completas.
 1. **Clone ou baixe o projeto:**
 ```bash
 cd C:\xampp\htdocs
-git clone https://github.com/seu-usuario/atelie-orcamentos.git
+git clone https://github.com/felipecsptbr/atelie-orcamentos.git
 ```
 
 2. **Crie o banco de dados:**
