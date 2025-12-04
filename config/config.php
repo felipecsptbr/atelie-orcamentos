@@ -11,10 +11,11 @@ $is_render = getenv('RENDER') !== false;
 // Configurações do Banco de Dados
 if ($is_railway) {
     // Railway: Usa variáveis de ambiente do MySQL
-    define('DB_HOST', getenv('MYSQLHOST'));
-    define('DB_NAME', getenv('MYSQLDATABASE'));
-    define('DB_USER', getenv('MYSQLUSER'));
-    define('DB_PASS', getenv('MYSQLPASSWORD'));
+    define('DB_HOST', getenv('MYSQLHOST') ?: 'localhost');
+    define('DB_PORT', getenv('MYSQLPORT') ?: '3306');
+    define('DB_NAME', getenv('MYSQLDATABASE') ?: 'railway');
+    define('DB_USER', getenv('MYSQLUSER') ?: 'root');
+    define('DB_PASS', getenv('MYSQLPASSWORD') ?: '');
     define('SITE_URL', 'https://' . getenv('RAILWAY_PUBLIC_DOMAIN'));
 } elseif ($is_render) {
     // Render: Usa PostgreSQL ou MySQL externo

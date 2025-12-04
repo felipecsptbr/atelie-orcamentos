@@ -15,7 +15,13 @@ class Database {
      */
     private function __construct() {
         try {
-            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+            // Monta DSN com suporte a porta personalizada (Railway)
+            $dsn = "mysql:host=" . DB_HOST;
+            if (defined('DB_PORT') && DB_PORT != '3306') {
+                $dsn .= ";port=" . DB_PORT;
+            }
+            $dsn .= ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+            
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
