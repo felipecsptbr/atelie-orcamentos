@@ -129,9 +129,11 @@ class PDF extends FPDF {
         $this->SetX($x_start);
         
         $dados_atelie = [];
-        if ($this->config['endereco']) $dados_atelie[] = $this->config['endereco'];
-        if ($this->config['telefone']) $dados_atelie[] = 'Tel: ' . $this->config['telefone'];
-        if ($this->config['email']) $dados_atelie[] = 'Email: ' . $this->config['email'];
+        if (!empty($this->config['endereco'])) $dados_atelie[] = $this->config['endereco'];
+        if (!empty($this->config['telefone']) && $this->config['telefone'] != '(00) 0000-0000') {
+            $dados_atelie[] = 'Tel: ' . $this->config['telefone'];
+        }
+        if (!empty($this->config['email'])) $dados_atelie[] = 'Email: ' . $this->config['email'];
         
         if (!empty($dados_atelie)) {
             $this->Cell(0, 5, convert_utf8(implode(' | ', $dados_atelie)), 0, 1);
