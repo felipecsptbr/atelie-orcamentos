@@ -1,12 +1,12 @@
 # Proteção de arquivos sensíveis
-<FilesMatch "\.(sql|md|log)$">
+<FilesMatch "\.(sql|md|log|json|toml|sh|txt)$">
     Order allow,deny
     Deny from all
 </FilesMatch>
 
-# Redirecionar erros
-ErrorDocument 404 /atelie-orcamentos/login.php
-ErrorDocument 403 /atelie-orcamentos/login.php
+# Redirecionar erros para login
+ErrorDocument 404 /login.php
+ErrorDocument 403 /login.php
 
 # Proteção contra listagem de diretórios
 Options -Indexes
