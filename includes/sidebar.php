@@ -70,14 +70,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 
                 <li class="nav-header">SISTEMA</li>
                 
-                <!-- Configurações -->
-                <li class="nav-item">
-                    <a href="configuracoes.php" class="nav-link <?php echo $currentPage == 'configuracoes.php' ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>Configurações</p>
-                    </a>
-                </li>
-                
                 <!-- Relatórios -->
                 <li class="nav-item">
                     <a href="relatorios.php" class="nav-link <?php echo $currentPage == 'relatorios.php' ? 'active' : ''; ?>">

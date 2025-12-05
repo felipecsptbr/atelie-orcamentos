@@ -128,15 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
             </form>
-            
-            <hr>
-            
-            <div class="text-center text-muted">
-                <small>
-                    <i class="fas fa-info-circle"></i> Usuário padrão:<br>
-                    <strong>admin@atelie.com</strong> / <strong>admin123</strong>
-                </small>
-            </div>
         </div>
     </div>
 </div>
